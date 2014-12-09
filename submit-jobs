@@ -8,7 +8,7 @@ cd $pwd/jobs/log
 
 for range in $ranges
 do
-	qsub -cwd -pe batch 4 $pwd/jobs/align-$range
+	qsub -cwd -pe mpi 2 $pwd/jobs/align-$range
 done
 
 cd $pwd
