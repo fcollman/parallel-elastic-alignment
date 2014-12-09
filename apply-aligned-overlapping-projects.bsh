@@ -66,7 +66,7 @@ overlap = Integer.parseInt(System.getProperty("overlap"));
 
 ControlWindow.setGUIEnabled(false);
 
-range = start + "-" + (start + overlap + overlap - 1);
+range = start + "-" + (start + overlap - 1);
 project1 = null;
 project2 = tryOpenProject(dir + "/" + range + "/project.xml");
 layerset1;
@@ -80,7 +80,7 @@ models.add(new RigidModel2D());
 
 box = layerset2.get2DBounds();
 
-for (int a = start + overlap; a <= end - overlap + 1; a += overlap) {
+for (int a = start ; a <= end - overlap + 1; a += overlap) {
 	System.out.println( "range1: " + range );
 	range = a + "-" + (a + 2 * overlap - 1);
 	ranges.add(range);
