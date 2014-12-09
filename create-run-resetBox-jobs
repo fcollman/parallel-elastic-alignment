@@ -61,7 +61,7 @@ do
 	range1="$i-$(($i+2*$step-1))"
     echo $range1
 
-	echo "${HOME}/bin/xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir=$projectBaseDir/$range1 -- --no-splash $projectBaseDir/reset-project-bounding-boxes.bsh" >> $job
+	echo "xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir=$projectBaseDir/$range1 -- --no-splash $projectBaseDir/reset-project-bounding-boxes.bsh" >> $job
 
 	((j++))
 done
