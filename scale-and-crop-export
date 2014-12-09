@@ -27,7 +27,7 @@ do
    if [ $j -ge $tasksPerJob ]; then
 	  chmod a+x "$script"
 	  cd "$logs"
-	  qsub -cwd -pe batch 4 $script # run previous job
+	  qsub -cwd -pe mpi 2 $script # run previous job
 	  cd "$pwd"
 
 	  j=0
@@ -43,11 +43,11 @@ do
 #	echo "convert $export/$file -crop 768x768+1550+4500 $export/crop2/$file" >> "$script"
 #	echo "convert $export/$file -crop 768x768+3970+5440 $export/crop/$file" >> "$script"
 #	echo "convert $export/$file -crop 768x768+1400+4700 $export/crop/$file" >> "$script"
-	echo "convert $export/$file -crop 2060x5120+3620+2220 $cropdir/$file" >> "$script"
+	echo "convert $export/$file -crop 4886x2910+1+1 $cropdir/$file" >> "$script"
 
 	((j++))
 done
 cd "$pwd"
 
 chmod a+x "$script"
-qsub -cwd -pe batch 4 $script # run previous job
+qsub -cwd -pe mpi 2 $script # run previous job
