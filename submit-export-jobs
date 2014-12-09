@@ -19,16 +19,21 @@ pwd=`pwd`
 mkdir -p $pwd/jobs/log
 cd $pwd/jobs/log
 
-#echo "qsub -pe batch 4 `pwd`/jobs/export-project-range-$first-$(($first+$step-1))"
+#echo "qsub -pe mpi 2 `pwd`/jobs/export-project-range-$first-$(($first+$step-1))"
 #qsub -pe batch 4 `pwd`/jobs/export-project-range-$first-$(($first+$step-1))
 
 #for i in `seq $first $step $(($last-3*$step))` 
+
+k=0
+qsub -cwd -pe mpi 2 $pwd/jobs/export-project-intersection-$k
+
 for i in `seq $first $step $(($last-$step))` 
 do
 	range="$i-$(($i+3*$step-1))"
-#	echo "qsub -pe batch 4 `pwd`/jobs/export-project-intersection-$range"
+#	echo "qsub -pe mpi 2 `pwd`/jobs/export-project-intersection-$range"
 	# qsub -pe batch 16 -l night=true `pwd`/jobs/export-project-intersection-$range
-	qsub -cwd -pe batch 16 $pwd/jobs/export-project-intersection-$range
+	((k++))
+	qsub -cwd -pe mpi 2 $pwd/jobs/export-project-intersection-$k
 done
 
 cd $pwd
