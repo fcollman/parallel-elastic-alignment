@@ -14,6 +14,6 @@ pwd=`pwd`
 abs="$pwd/$range"
 
 echo "#!/bin/bash" > jobs/test-projects
-echo "${HOME}/bin/xvfb-run -a ${HOME}/packages/Fiji.app/fiji-linux64 -Xms10g -Xmx10g -Ddir=${pwd} -Dstart=0 -Dend=$(($n-1)) -Doverlap=$(($mod/2)) -- --no-splash ${pwd}/test-projects.bsh" >> jobs/test-projects
+echo "xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir=${pwd} -Dstart=0 -Dend=$(($n-1)) -Doverlap=$(($mod/2)) -- --no-splash ${pwd}/test-projects.bsh" >> jobs/test-projects
 chmod a+x jobs/test-projects
 
