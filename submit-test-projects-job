@@ -4,6 +4,6 @@ pwd=`pwd`
 mkdir -p $pwd/jobs/log
 cd $pwd/jobs/log
 
-qsub -cwd -pe batch 4 $pwd/jobs/test-projects
+qsub -cwd -pe mpi 2 $pwd/jobs/test-projects
 
 cd $pwd
