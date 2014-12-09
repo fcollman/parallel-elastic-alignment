@@ -17,6 +17,16 @@ pwd=`pwd`
 mkdir -p $pwd/jobs/log
 cd $pwd/jobs/log
 
+
+range="0-$((2*$step-1))"
+range2="0-$((2*$step-1))"
+if [ ! -e "$pwd/$range2/rigid.txt" ]
+        then
+		echo "re-submitting range $range"
+		qsub -cwd -pe mpi 1 $pwd/jobs/align-overlapping-projects-pair-$range
+fi
+	
+
 for i in `seq $first $step $(($last-$step))` 
 do
 	range="$i-$(($i+3*$step-1))"
@@ -24,7 +34,7 @@ do
 	if [ ! -e "$pwd/$range2/rigid.txt" ]
         then
 		echo "re-submitting range $range"
-		qsub -cwd -pe batch 1 $pwd/jobs/align-overlapping-projects-pair-$range
+		qsub -cwd -pe mpi 1 $pwd/jobs/align-overlapping-projects-pair-$range
 	fi
 done
 
