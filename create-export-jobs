@@ -45,6 +45,10 @@ mkdir -p export
 job="jobs/export-project-intersection-$k"
 echo "#!/bin/bash" > $job
 
+range1="$first-$(($first+$step-1))"
+range2="$first-$(($first+2*$step-1))"
+echo "xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir1=$projectBaseDir/$range1 -Ddir2=$projectBaseDir/$range2 -Dexport=$exportDir/export  -- --no-splash $projectBaseDir/open-and-export-project-intersection.bsh" >> $job
+
 #for i in `seq $first $step $(($last-3*$step))` 
 for i in `seq $first $step $(($last-$step))` 
 do
@@ -62,7 +66,7 @@ do
 	range1="$i-$(($i+2*$step-1))"
 	range2="$(($i+$step))-$(($i+3*$step-1))"
 
-	echo "${HOME}/bin/xvfb-run -a ${HOME}/packages/Fiji.app/fiji-linux64 -Xms10g -Xmx10g -Ddir1=$projectBaseDir/$range1 -Ddir2=$projectBaseDir/$range2 -Dexport=$exportDir/export  -- --no-splash $projectBaseDir/open-and-export-project-intersection.bsh" >> $job
+	echo "xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir1=$projectBaseDir/$range1 -Ddir2=$projectBaseDir/$range2 -Dexport=$exportDir/export  -- --no-splash $projectBaseDir/open-and-export-project-intersection.bsh" >> $job
 	#chmod a+x $job
 
 	((j++))
