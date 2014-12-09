@@ -15,6 +15,6 @@ pwd=`pwd`
 abs="$pwd/$range"
 
 echo "#!/bin/bash" > jobs/apply-aligned-overlapping-projects
-echo "${HOME}/bin/xvfb-run -a ${HOME}/packages/Fiji.app/fiji-linux64 -Xms10g -Xmx10g -Ddir=${pwd} -Dstart=0 -Dend=$(($n-1)) -Doverlap=$(($mod/2)) -- --no-splash ${pwd}/apply-aligned-overlapping-projects.bsh" >> jobs/apply-aligned-overlapping-projects
+echo "xvfb-run -a ${HOME}/packages/Fiji.app/ImageJ-linux64 -Xms10g -Xmx10g -Ddir=${pwd} -Dstart=0 -Dend=$(($n-1)) -Doverlap=$(($mod/2)) -- --no-splash ${pwd}/apply-aligned-overlapping-projects.bsh" >> jobs/apply-aligned-overlapping-projects
 chmod a+x jobs/apply-aligned-overlapping-projects
 
