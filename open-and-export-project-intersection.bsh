@@ -27,8 +27,33 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.thoughtworks.xstream.XStream;
+import java.io.IOException;
 
 
+	public static boolean writeObjectToFileXstream(Object o,String path) {
+
+      //filename is filepath string
+       try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
+            Writer writer = new FileWriter(file);
+            XStream xstream=new XStream();
+            writer.write(xstream.toXML(o));
+            writer.close();
+        }
+        catch (  IOException e )
+        {
+            System.err.println( "Error writing JSON file: " + path );
+            e.printStackTrace( System.err );
+        } 
+        catch ( Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+  }
 
 	public static boolean writeObjectToFile(Object o,String path) {
 
@@ -54,8 +79,8 @@ import com.google.gson.reflect.TypeToken;
         }
         return true;
 
-}
-
+  }
+  
 
 
 int meshResolution = 128;
@@ -124,13 +149,14 @@ for (int i = 0; i < pairs.size(); ++i) {
 	imp = new ImagePlus( "", ipExport );
 	IJ.save(imp, export + "/" + p1.getTitle() + ".tif");
 	
-	writeObjectToFile(ct,export + "/" +p1.getTitle() + ".xml");
-	
+	//writeObjectToFile(ct,export + "/" +p1.getTitle() + ".xml");
+	writeObjectToFileXstream(ct,export + "/" +p1.getTitle() + ".xml");
 	//saveTransform(export + "/" + p1.getTitle() + ".xml",ct,box);
 	
 	
 }
-writeObjectToFile(ct,export + "/boundbox.xml");
+//writeObjectToFile(box,export + "/boundbox.xml");
+writeObjectToFileXstream(box,export + "/boundbox.xml");
 
 
 /* shutdown */
